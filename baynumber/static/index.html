@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121212">
+  <title>BayNumber — Shift board</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="top-stripe" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="BayNumber home"><span class="brand-icon">B<span>·</span>N</span><span class="brand-name">BAY<span>NUMBER</span><small>PARKING LEDGER / SOCIETY EDITION</small></span></a>
+    <div class="header-right"><span class="live-dot"></span><span id="session-label">PUBLIC DEMO</span><button id="logout" class="text-button hidden" type="button">Sign out ↗</button></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-kicker"><span class="short-line"></span> SHIFT CONTROL / BAY STATUS</div>
+      <div class="hero-row"><div><h1>Every bay.<br><em>Accounted for.</em></h1><p>Find a vehicle, check its bay, record the movement. A clear answer, even when the garage is busy.</p></div><div class="hero-badge" aria-hidden="true"><span>BN</span><small>01 / 24</small></div></div>
+    </section>
+    <div id="notice" class="notice hidden" role="alert"></div>
+    <section id="login-panel" class="login-panel" aria-labelledby="login-title">
+      <div><span class="eyebrow">SECURE ACCESS</span><h2 id="login-title">Take your station.</h2><p>Sign in to see live plate and unit details. The public board below contains synthetic records only.</p></div>
+      <form id="login-form"><label>USERNAME<input id="username" name="username" autocomplete="username" required></label><label>PASSWORD<input id="password" name="password" type="password" autocomplete="current-password" required></label><button class="primary-button" type="submit">Open live board <span>→</span></button></form>
+    </section>
+    <section class="board-section" aria-labelledby="board-title">
+      <div class="section-heading"><div><span class="eyebrow">LIVE INVENTORY <span id="demo-flag">/ DEMO DATA</span></span><h2 id="board-title">Bay board<span class="yellow-period">.</span></h2></div><button id="refresh" class="outline-button" type="button">↻ &nbsp; Refresh board</button></div>
+      <div id="toolbar" class="toolbar hidden"><label for="plate-search">FIND VEHICLE</label><div class="search-row"><input id="plate-search" placeholder="Enter plate, e.g. KA03AB1234" autocomplete="off"><button id="search-button" type="button">Find bay <span>→</span></button></div><p id="search-result" class="search-result" aria-live="polite"></p></div>
+      <div class="legend"><span><i class="key free"></i> Free</span><span><i class="key assigned"></i> Assigned</span><span><i class="key occupied"></i> Occupied</span><span><i class="key conflict"></i> Conflict</span></div>
+      <div id="board" class="board-grid" aria-live="polite"></div>
+      <p class="board-footnote" id="board-footnote">SYNTHETIC PREVIEW · Sign in for current society occupancy and movements.</p>
+    </section>
+    <section id="admin-panel" class="admin-panel hidden" aria-labelledby="admin-title"><div class="section-heading"><div><span class="eyebrow">SECRETARY CONTROLS</span><h2 id="admin-title">Manage the ledger<span class="yellow-period">.</span></h2></div></div><div class="admin-grid"><form id="bay-form" class="control-card"><span class="control-number">01 / CREATE</span><h3>Add a bay</h3><label>BAY LABEL<input name="label" placeholder="A-04" required maxlength="12"></label><button type="submit">Create bay →</button></form><form id="assignment-form" class="control-card"><span class="control-number">02 / ASSIGN</span><h3>Assign a vehicle</h3><label>BAY<select name="bay_id" id="bay-select" required></select></label><label>UNIT<input name="unit" placeholder="TOWER A / 402" required maxlength="24"></label><label>PLATE<input name="plate" placeholder="KA03AB1234" required></label><button type="submit">Create assignment →</button></form><div class="control-card export-card"><span class="control-number">03 / AUDIT</span><h3>Export records</h3><p>Stable CSVs for movements and assignment changes. Admin access only.</p><a href="/api/export/events.csv" download>↓ Movement events CSV</a><a href="/api/export/assignment-audit.csv" download>↓ Assignment audit CSV</a></div></div></section>
+  </main>
+  <footer><span>BAYNUMBER / ONE SOCIETY, ONE CLEAR LEDGER</span><span>PRIVATE BY DESIGN · © 2026</span></footer>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

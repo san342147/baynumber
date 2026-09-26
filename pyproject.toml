@@ -1,0 +1,29 @@
+[project]
+name = "baynumber"
+version = "0.1.0"
+description = "A private parking-bay ledger for one apartment society"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi==0.135.1",
+  "pydantic==2.13.5",
+  "uvicorn==0.41.0",
+]
+
+[project.optional-dependencies]
+test = ["httpx==0.28.1", "pytest==9.0.2"]
+
+[project.scripts]
+baynumber = "baynumber.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["setuptools==78.1.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+baynumber = ["static/*", "migrations/*.sql"]
+
+[tool.setuptools]
+packages = ["baynumber"]

@@ -1,0 +1,13 @@
+.env
+.venv/
+.uv-cache/
+*.db
+*.db-*
+__pycache__/
+.pytest_cache/
+.pytest-tmp/
+*.pyc
+*.demo-marker
+dist/
+build/
+*.egg-info/
