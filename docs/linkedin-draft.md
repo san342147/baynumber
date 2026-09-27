@@ -1,13 +1,14 @@
-# LinkedIn draft — verify before posting
+# LinkedIn post — BayNumber 30-second demo
 
-I built **BayNumber**, a small parking-bay ledger for an apartment society.
+As a student, I learn best by building around a real workflow. My latest project is **BayNumber**, a parking-bay ledger for one apartment society. 🚗
 
-The guard view answers two shift questions quickly: “Which bay belongs to this plate?” and “Is it occupied now?” A secretary can create bays, change assignments, and export movement and assignment audit CSVs. The public board is synthetic and hides plate and unit details.
+During a busy shift, a guard needs to answer two questions quickly: “Which bay belongs to this vehicle?” and “Is it occupied now?” The 30-second demo shows the board, a vehicle lookup, an IN/OUT movement, and what happens when someone tries to record a second IN for an occupied bay.
 
-Under the hood: Python 3.12, FastAPI, Pydantic, and SQLite. SQLite write transactions serialize competing movement requests. In the local test run, two simultaneous IN attempts produced exactly one success, one conflict, and one event. The five automated tests passed, covering the clean workflow, validation, constraints, transactions, permissions, CSV headers, and missing-database errors.
+I built it with Python 3.12, FastAPI, Pydantic, and SQLite. The ledger uses transactions and constraints to protect its event history; a secretary can manage assignments and export audit CSVs. Five local tests passed, including the concurrent IN conflict case.
 
-I kept the scope deliberate: one society, local storage, no contact fields, and no AI dependency. There are still production gaps to address before a wider rollout, including account provisioning, HTTPS deployment, backups, and multi-device operational testing.
+The public preview and video use **synthetic data only**. The code is open source under the MIT License:
+https://github.com/san342147/baynumber
 
-Repo: https://github.com/san342147/baynumber
+I would appreciate feedback on the guard workflow and mobile UI.
 
-#Python #FastAPI #SQLite #ProductEngineering
+#Python #FastAPI #SQLite #StudentDeveloper #BuildInPublic
