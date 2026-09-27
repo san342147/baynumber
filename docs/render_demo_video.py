@@ -1,6 +1,6 @@
 """Render the 30-second BayNumber demo from synthetic UI captures.
 
-Optional tooling: Pillow and opencv-python. Run from the repository root with
+Optional tooling is pinned in ``docs/requirements-video.txt``. Run from the repository root with
 ``python docs/render_demo_video.py`` after capturing the demo screens.
 """
 
@@ -8,8 +8,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+import subprocess
 
 import cv2
+import imageio_ffmpeg
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
@@ -17,6 +19,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent
 CAPTURES = ROOT / "video-captures"
 OUTPUT = ROOT / "baynumber-demo-30s.mp4"
+INTERMEDIATE = CAPTURES / "render-mp4v.mp4"
 WIDTH, HEIGHT, FPS = 1280, 720, 24
 BG = "#121212"
 PANEL = "#1c1c1b"
@@ -132,7 +135,7 @@ def draw_scene(scene: Scene, index: int) -> Image.Image:
 
 
 def main() -> None:
-    writer = cv2.VideoWriter(str(OUTPUT), cv2.VideoWriter_fourcc(*"mp4v"), FPS, (WIDTH, HEIGHT))
+    writer = cv2.VideoWriter(str(INTERMEDIATE), cv2.VideoWriter_fourcc(*"mp4v"), FPS, (WIDTH, HEIGHT))
     if not writer.isOpened():
         raise RuntimeError("Could not open MP4 writer")
     try:
@@ -147,6 +150,15 @@ def main() -> None:
                 writer.write(cv2.cvtColor(np.asarray(frame), cv2.COLOR_RGB2BGR))
     finally:
         writer.release()
+    subprocess.run(
+        [imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-i", str(INTERMEDIATE), "-an",
+         "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p",
+         "-movflags", "+faststart", str(OUTPUT)],
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+    )
+    INTERMEDIATE.unlink()
     print(f"Wrote {OUTPUT} ({sum((s.end - s.start) * FPS for s in SCENES)} frames at {FPS} fps)")
 
 

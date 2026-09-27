@@ -11,6 +11,7 @@ A private parking-bay ledger for one apartment society. The phone-width guard bo
 Signed-in synthetic guard views: [desktop](docs/screenshots/guard-board.png), [phone](docs/screenshots/guard-mobile.png), and [conflict feedback](docs/screenshots/conflict.png).
 
 Watch the [30-second demo](docs/baynumber-demo-30s.mp4), made entirely with synthetic records.
+To rebuild the H.264 clip from the checked-in demo captures, install [optional video dependencies](docs/requirements-video.txt) and run `python docs/render_demo_video.py`.
 
 ## Guard workflow
 

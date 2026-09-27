@@ -1,0 +1,4 @@
+# Optional demo-video rendering tools, separate from the app runtime.
+Pillow==12.1.1
+opencv-python-headless==4.13.0.92
+imageio-ffmpeg==0.6.0
