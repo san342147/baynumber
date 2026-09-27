@@ -71,3 +71,7 @@ The public/demo board exposes synthetic states only; it does not fetch the real 
 Local verification on 2026-09-24: **5 passed**. The tests exercise clean create/assign/IN/OUT/export, a two-thread IN race, unique constraints, immutable events, rollback on rejected assignment ending, validation, CSRF and role permissions, CSV headers, synthetic preview, and missing database behavior. See [demo script](docs/demo-script.md) and [LinkedIn draft](docs/linkedin-draft.md).
 
 Known gaps: no account rotation UI, rate limiting, automated backup/restore, or multi-device field test. For a real deployment, use HTTPS, restrict database file access, schedule backups, and add site-specific operating procedures before onboarding staff.
+
+## License
+
+BayNumber is released under the [MIT License](LICENSE). Copyright (c) 2026 Santhosh A.
